@@ -8,6 +8,7 @@ from wishlist.views import show_json_by_id
 # Lab 03
 from wishlist.views import register
 from wishlist.views import login_user 
+from wishlist.views import logout_user
 
 app_name = 'wishlist'
 
@@ -20,4 +21,5 @@ urlpatterns = [
     # Lab 03
     path('register/', register, name='register'), # http://localhost:8000/wishlist/register/
     path('login/', login_user, name='login'), # http://localhost:8000/wishlist/login/
+    path('logout/', logout_user, name='logout'),
 ]
