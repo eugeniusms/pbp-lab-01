@@ -6,7 +6,8 @@ from wishlist.views import show_xml_by_id
 from wishlist.views import show_json_by_id
 
 # Lab 03
-from wishlist.views import register #sesuaikan dengan nama fungsi yang dibuat
+from wishlist.views import register
+from wishlist.views import login_user 
 
 app_name = 'wishlist'
 
@@ -18,4 +19,5 @@ urlpatterns = [
     path('json/<int:id>', show_json_by_id, name='show_json_by_id'), # 
     # Lab 03
     path('register/', register, name='register'), # http://localhost:8000/wishlist/register/
+    path('login/', login_user, name='login'), # http://localhost:8000/wishlist/login/
 ]
