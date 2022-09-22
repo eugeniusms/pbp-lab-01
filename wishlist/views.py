@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 # Lab 03
 def register(request):
@@ -45,6 +46,7 @@ def logout_user(request):
     logout(request)
     return redirect('wishlist:login')
 
+@login_required(login_url='/wishlist/login/')
 def show_wishlist(request):
     data_barang_wishlist = BarangWishlist.objects.all()
     context = {
