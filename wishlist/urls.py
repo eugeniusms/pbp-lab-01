@@ -5,6 +5,9 @@ from wishlist.views import show_json
 from wishlist.views import show_xml_by_id
 from wishlist.views import show_json_by_id
 
+# Lab 03
+from wishlist.views import register #sesuaikan dengan nama fungsi yang dibuat
+
 app_name = 'wishlist'
 
 urlpatterns = [
@@ -12,5 +15,7 @@ urlpatterns = [
     path('xml/', show_xml, name='show_xml'), # http://localhost:8000/wishlist/xml/
     path('json/', show_json, name='show_json'), # http://localhost:8000/wishlist/json/
     path('xml/<int:id>', show_xml_by_id, name='show_xml_by_id'), # http://localhost:8000/wishlist/xml/<pk:id>
-    path('json/<int:id>', show_json_by_id, name='show_json_by_id'), # http://localhost:8000/wishlist/json/<pk:id>
+    path('json/<int:id>', show_json_by_id, name='show_json_by_id'), # 
+    # Lab 03
+    path('register/', register, name='register'), # http://localhost:8000/wishlist/register/
 ]

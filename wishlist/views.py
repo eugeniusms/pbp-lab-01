@@ -5,7 +5,25 @@ from wishlist.models import BarangWishlist
 from django.http import HttpResponse
 from django.core import serializers
 
-# Create your views here.
+# Lab 03
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
+# Lab 03
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Akun telah berhasil dibuat!')
+            return redirect('wishlist:login')
+    
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
 def show_wishlist(request):
     data_barang_wishlist = BarangWishlist.objects.all()
     context = {
