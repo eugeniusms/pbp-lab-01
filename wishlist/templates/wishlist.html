@@ -1,40 +1,53 @@
-<html>
-    {% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"  href="{% static 'wishlist.css' %}">
-        <title>Data Mario</title>
-    </head>
+{% extends 'base.html' %}
 
-    <body>
-        {% block content %}
-        <div class="profil">
-            <p>Nama:&nbsp;{{nama}}</p> 
+{% block meta %}
+<title>Wishlist Mario</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="wishlist text-bg-dark" style="height:800px"">
+    <div class="navbar d-flex  py-3 text-bg-secondary px-4">
+        <div class="align-self-center">
+            <div>{{nama}}</div> 
         </div>
+        <div>
+            <a href="{% url 'wishlist:logout' %}">
+                <button class="btn btn-danger" >
+                    Logout
+                </button>
+            </a>
+        </div>
+    </div>
 
-        <table>
-            <tr class="judul-tabel">
-                <th>Nama Barang</th>
-                <th>Harga Barang</th>
-                <th>Deskripsi</th>
-            </tr>
-            {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    <br><br><br>
+    <div class="d-flex justify-content-center">
+        <div>
             {% for barang in list_barang %}
-            <tr>
-                <th>{{barang.nama_barang}}</th>
-                <th>Rp. {{barang.harga_barang}},-</th>
-                <th>{{barang.deskripsi}}</th>
-            </tr>
-        {% endfor %}
-        </table>
+            <div class="card text-dark p-4">
+                <div class="d-flex justify-content-between">
+                    <div class="">
+                        <b>{{barang.nama_barang}}</b>
+                    </div>
+                    <div>
+                        <p style="font-size:12px;">
+                            <i>Rp. {{barang.harga_barang}},-</i>
+                        </p>
+                    </div>
+                </div>
+                <div class="card text-bg-light p-2" style="font-size:12px;">
+                    {{barang.deskripsi}}
+                </div>
+            </div>
+            <br>
 
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
+            {% endfor %}
 
-        <button>
-            <a href="{% url 'wishlist:logout' %}">Logout</a>
-        </button>
+            <br>
+            <div class="d-flex justify-content-center">
+                <div class="text-warning">Sesi terakhir login: {{ last_login }}</div>
+            </div>
+        </div>
+    </div>
 
-        {% endblock content %}
-    </body>
-</html>
+</div>
+{% endblock content %}
