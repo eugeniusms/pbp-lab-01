@@ -6,40 +6,53 @@
 
 {% block content %}
 
-<div class = "login">
+<div class = "login text-bg-dark" style="height:800px">
+    <br><br><br><br><br><br>
+    <div class="d-flex justify-content-center">
+    <div>
+        <div class="d-flex justify-content-center">
+            <h1>Login</h1>
+        </div>
+        <br>
+        <div class="card p-5 text-dark">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><div>Username&nbsp;&nbsp;</td>
+                        <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                    </tr>
+                    <tr><td></td></tr>  
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr>
+                        <td>Password&nbsp;&nbsp;</td>
+                        <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                    </tr>
+                </table>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" value="Login" class="btn btn-primary">Login</button></td>
+                </div>
+            </form>
+        </div>
 
-    <h1>Login</h1>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+        <div class="d-flex justify-content-center text-danger">
+            {% if messages %}
+                <br>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}     
+        </div>
         
-    Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">Buat Akun</a>
-
+        <br>
+        <div class="d-flex justify-content-center">
+            Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">&nbsp;Buat Akun</a>
+        </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
