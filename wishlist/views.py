@@ -18,6 +18,9 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+# Lab 04
+from django.views.decorators.csrf import csrf_exempt
+
 # Lab 03
 def register(request):
     form = UserCreationForm()
@@ -80,3 +83,28 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = BarangWishlist.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+# menampilkan data barang menggunakan get ajax
+@login_required(login_url='/wishlist/login/')
+def wishlist_ajax(request):
+    data_barang_wishlist = BarangWishlist.objects.all()
+    context = {
+        'list_barang': data_barang_wishlist,
+        'nama': 'Eugenius Mario Situmorang',
+        'last_login': request.COOKIES['last_login'],
+    }
+    return render(request, "wishlist_ajax.html",context)
+
+# view digunakan untuk menerima data menambahkan BarangWishlist ke database
+@login_required(login_url='login/')
+@csrf_exempt
+def show_wishlist_ajax(request):
+    if request.method == 'POST':
+        # mendapatkan request user
+        nama_barang = request.POST.get('nama_barang')
+        harga_barang = request.POST.get('harga_barang')
+        deskripsi = request.POST.get('deskripsi')
+        # menambahkan barang wishlist ke database
+        BarangWishlist.objects.create(nama_barang=nama_barang,deskripsi=deskripsi,harga_barang=harga_barang)
+        response = HttpResponseRedirect(reverse("wishlist:wishlist_ajax")) 
+        return response

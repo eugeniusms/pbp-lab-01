@@ -10,6 +10,11 @@ from wishlist.views import register
 from wishlist.views import login_user 
 from wishlist.views import logout_user
 
+# Lab 04
+from wishlist.views import wishlist_ajax
+from wishlist.views import show_wishlist_ajax
+
+
 app_name = 'wishlist'
 
 urlpatterns = [
@@ -22,4 +27,7 @@ urlpatterns = [
     path('register/', register, name='register'), # http://localhost:8000/wishlist/register/
     path('login/', login_user, name='login'), # http://localhost:8000/wishlist/login/
     path('logout/', logout_user, name='logout'),
+    # Lab 04
+    path('ajax', wishlist_ajax, name='wishlist_ajax'), # http://localhost:8000/wishlist/ajax/
+    path('ajax/submit', show_wishlist_ajax, name='show_wishlist_ajax'), # POST TEMBAK URL
 ]
