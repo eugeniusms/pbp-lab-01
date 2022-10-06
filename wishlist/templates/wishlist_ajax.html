@@ -10,12 +10,22 @@
             $.get("http://localhost:8000/wishlist/json", function(data) {
                 for (let barang of data){
                     $(".daftar-barang").append(
-                        `<tr>
-                            <td>${barang.fields.nama_barang}</td>
-                            <td>${barang.fields.harga_barang}</td>
-                            <td>${barang.fields.deskripsi}</td>
-                        </tr>`)
-                }
+                        `<div class="card text-dark p-4 m-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="">
+                                    <b>${barang.fields.nama_barang}</b>
+                                </div>
+                                <div>
+                                    <p style="font-size:12px;">
+                                        <i>Rp. ${barang.fields.harga_barang},-</i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card text-bg-light p-2" style="font-size:12px;">
+                                ${barang.fields.deskripsi}
+                            </div>
+                        </div>`)
+                }                
             });
             // AJAX [POST]
             // saat submit-button diclick maka post ke "http://localhost:8000/wishlist/ajax/submit"
@@ -55,15 +65,19 @@
             <input type="text" name="deskripsi" id="deskripsi" placeholder="deskripsi" class="form-control" >
             <button id="submit-button">Tambah Wishlist</button>
     </form>
+
+    <!-- MELETAKKAN DATA DARI AJAX [GET]-->
+    <br><br><br>
+    <div class="d-flex justify-content-center">
+        <div class="daftar-barang"></div>
+    </div>
+
+    <br>
+    <div class="d-flex justify-content-center">
+        <div class="text-warning p-4">Sesi terakhir login: {{ last_login }}</div>
+    </div>
 </div>
 
-<!-- DATA DARI AJAX [GET]-->
-<table class="daftar-barang">
-    <tr>
-        <th>Nama Barang</th>
-        <th>Harga Barang</th>
-        <th>Deskripsi</th>
-    </tr>
-</table>
+
 
 {% endblock content %}
